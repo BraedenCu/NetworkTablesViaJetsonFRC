@@ -25,9 +25,10 @@ import numpy as np
 
 lowerBound=np.array([33,80,40])
 upperBound=np.array([102,255,255])
-
 red = (255,0,0)
-
+distance = 1
+xcenter = 1
+center = 0
 cam = cv2.VideoCapture(1)
 
 kernelOpen=np.ones((5,5))
@@ -35,7 +36,7 @@ kernelClose=np.ones((20,20))
 
 
 while True:
-
+    
     table = NetworkTables.getTable('8029data')
     #prev frame not image
     ret, image = cam.read()
@@ -52,22 +53,23 @@ while True:
     maskClose=cv2.morphologyEx(maskOpen,cv2.MORPH_CLOSE,kernelClose)
 
     maskFinal=maskClose
-    #conts, h, = cv2.findContours(maskFinal.copy(),cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_NONE)
     _, conts, _= cv2.findContours(maskFinal.copy(),cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    
     for i in range(len(conts)):
         #cool center stuff (for big brains only)        
-        c =  max (conts,key=cv2.contourArea)
+        c =  max(conts,key=cv2.contourArea)
         ((x, y), radius) = cv2.minEnclosingCircle(c)
         M = cv2.moments(c)
-	x = int(M["m10"] / M["m00"]
-	x - 125 = distance
         center = (int(M["m10"] / M["m00"]), int(M["m01"] / M["m00"]))
-        print(center)
-        x,y,w,h=cv2.boundingRect(conts[i])
-        cv2.rectangle(frame,(x,y),(x+w,y+h),(0,0,255), 2)
-        #cv2.cv.PutText(cv2.cv.fromarray(img), str(i+1),(x,y+h),font,(0,255,255))
-        table.putNumber('x', x)
-
+        if radius > 50:
+             x,y,w,h=cv2.boundingRect(conts[i])
+             cv2.rectangle(frame,(x,y),(x+w,y+h),(0,0,255), 2)
+             print(center)
+             xcenter = (int(M["m10"] / M["m00"]))
+             distance = int(xcenter - 125)
+             table.putNumber('x', xcenter)
+        else:
+             table.putNumber('x', 1)
     #cv2.imshow("maskClose",maskClose)
     #cv2.imshow("maskOpen",maskOpen)
     #cv2.imshow("mask",mask)
