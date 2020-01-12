@@ -69,7 +69,7 @@ while True:
              distance = int(xcenter - 125)
              table.putNumber('x', xcenter)
         else:
-             table.putNumber('x', 1)
+             table.putNumber('x', 125)
     #cv2.imshow("maskClose",maskClose)
     #cv2.imshow("maskOpen",maskOpen)
     #cv2.imshow("mask",mask)
