@@ -1,8 +1,7 @@
 # NetworkTablesViaJetsonFRC
 Quick tutorial for setting up NetworkTables on the Jetson TX2 for use in FRC
 
-pip install pynetworktables
-https://github.com/BraedenCullenCodes/NetworkTablesViaJetsonFRC
+pip3 install pynetworktables
 
 Connect Jetson to Robot Radio over ethernet
 
