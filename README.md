@@ -10,4 +10,4 @@ Then upload code from the respective files onto Rio and Jetson
 
 The Rio program will change the value of X in the network table to a certain value once a button on a controller is pressed.
 
-The program on the Jetson starts by listening for connections, then connects, then simply prints out the data inside the specified seciton of the network table.
+The program on the Jetson starts by listening for connections, then connects, then simply prints out the data inside the specified seciton of the network table
