@@ -1,7 +1,7 @@
 # NetworkTablesViaJetsonFRC
 Quick tutorial for setting up NetworkTables on the Jetson TX2 for use in FRC
 
-I think Jetson comes with python
+The Jetson comes with python pre-installed (I believe)
 
 pip3 install pynetworktables
 
